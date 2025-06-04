@@ -1,0 +1,35 @@
+{
+    "rewrites": [
+        {
+            "source": "/api/:path*",
+            "destination": "https://ai-ats-resume-builder-backend.onrender.com/api/:path*"
+        }
+    ],
+    "redirects": [
+        {
+            "source": "/auth/sign-in",
+            "destination": "/",
+            "permanent": false
+        },
+        {
+            "source": "/dashboard",
+            "destination": "/",
+            "permanent": false
+        },
+        {
+            "source": "/dashboard/edit-resume/:resume_id",
+            "destination": "/",
+            "permanent": false
+        },
+        {
+            "source": "/dashboard/view-resume/:resume_id",
+            "destination": "/",
+            "permanent": false
+        },
+        {
+            "source": "/print/:resume_id",
+            "destination": "/",
+            "permanent": false
+        }
+    ]
+}
