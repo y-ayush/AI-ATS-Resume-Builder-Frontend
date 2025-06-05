@@ -51,7 +51,7 @@ function Summary({ resumeInfo, enanbledNext, enanbledPrev }) {
                     setLoading(false);
                 });
         }
-    }; // Declare the undeclared variable using useState
+    };
 
     const setSummery = (summary) => {
         dispatch(
@@ -76,6 +76,7 @@ function Summary({ resumeInfo, enanbledNext, enanbledPrev }) {
             const result = await AIChatSession.sendMessage(PROMPT);
             console.log(JSON.parse(result.response.text()));
             setAiGenerateSummeryList(JSON.parse(result.response.text()));
+            console.log("Generated Summery list:", aiGeneratedSummeryList);
             toast("Summery Generated", "success");
         } catch (error) {
             console.log(error);
@@ -128,22 +129,23 @@ function Summary({ resumeInfo, enanbledNext, enanbledPrev }) {
                     <h2 className="font-bold text-lg text-gray-200">
                         Suggestions
                     </h2>
-                    {aiGeneratedSummeryList?.map((item, index) => (
-                        <div
-                            key={index}
-                            onClick={() => {
-                                enanbledNext(false);
-                                enanbledPrev(false);
-                                setSummery(item?.summary);
-                            }}
-                            className="p-5 shadow-lg my-4 rounded-lg cursor-pointer bg-amber-100"
-                        >
-                            <h2 className="font-bold my-1 text-primary">
-                                Level: {item?.experience_level}
-                            </h2>
-                            <p>{item?.summary}</p>
-                        </div>
-                    ))}
+                    {Array.isArray(aiGeneratedSummeryList) &&
+                        aiGeneratedSummeryList?.map((item, index) => (
+                            <div
+                                key={index}
+                                onClick={() => {
+                                    enanbledNext(false);
+                                    enanbledPrev(false);
+                                    setSummery(item?.summary);
+                                }}
+                                className="p-5 shadow-lg my-4 rounded-lg cursor-pointer bg-amber-100"
+                            >
+                                <h2 className="font-bold my-1 text-primary">
+                                    Level: {item?.experience_level}
+                                </h2>
+                                <p>{item?.summary}</p>
+                            </div>
+                        ))}
                 </div>
             )}
         </div>
