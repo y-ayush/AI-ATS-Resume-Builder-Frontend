@@ -75,7 +75,9 @@ function Summary({ resumeInfo, enanbledNext, enanbledPrev }) {
         try {
             const result = await AIChatSession.sendMessage(PROMPT);
             console.log(JSON.parse(result.response.text()));
-            setAiGenerateSummeryList(JSON.parse(result.response.text()));
+            setAiGenerateSummeryList(
+                JSON.parse(result.response.text())?.summaries
+            );
             console.log("Generated Summery list:", aiGeneratedSummeryList);
             toast("Summery Generated", "success");
         } catch (error) {
